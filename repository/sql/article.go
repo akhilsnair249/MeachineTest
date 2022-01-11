@@ -41,6 +41,6 @@ func (repo Article) Decline(ctx context.Context, req *Article) error {
 	return repo.connection.WithContext(ctx).Save(req).Error
 }
 
-func (repo Article) Create(ctx context.Context, newModel Article) error {
+func (repo Article) Create(ctx context.Context, newModel *Article) error {
 	return repo.connection.WithContext(ctx).Create(newModel).Error
 }

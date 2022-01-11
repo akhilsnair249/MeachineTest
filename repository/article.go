@@ -9,9 +9,9 @@ type Article interface {
 
 	ShowAll(ctx context.Context) ([]Article, error)
 
-	Aprove(ctx context.Context, req Article) error
+	Aprove(ctx context.Context, req *Article) error
 
-	Decline(ctx context.Context, req Article) error
+	Decline(ctx context.Context, req *Article) error
 
-	Create(ctx context.Context, newModel Article) error
+	Create(ctx context.Context, newModel *Article) error
 }

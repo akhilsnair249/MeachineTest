@@ -43,13 +43,13 @@ func (bll Article) AproveArticle(ctx context.Context, id string) error {
 		return DBError{Messsage: "Invalid ID", ActualError: err, ErrorFrom: nil}
 	}
 
-	allArticle, err := bll.repo.Show(ctx)
+	article, err := bll.repo.Show(ctx)
 
 	if err != nil {
 		return DBError{Messsage: "Unable to get article details!", ActualError: err, ErrorFrom: nil}
 	}
 
-	allArticle, err := bll.repo.Aprove(ctx)
+	err = bll.repo.Aprove(ctx, &article)
 
 	if err != nil {
 		return DBError{Messsage: "Unable to approve article details!", ActualError: err, ErrorFrom: nil}
@@ -57,6 +57,7 @@ func (bll Article) AproveArticle(ctx context.Context, id string) error {
 
 	return nil
 }
+
 func (bll Article) DeclineArticle(ctx context.Context, id string) error {
 
 	reqCode64, err := strconv.ParseInt(id, 10, 64)
@@ -65,13 +66,13 @@ func (bll Article) DeclineArticle(ctx context.Context, id string) error {
 		return DBError{Messsage: "Invalid ID", ActualError: err, ErrorFrom: nil}
 	}
 
-	allArticle, err := bll.repo.Show(ctx)
+	article, err := bll.repo.Show(ctx)
 
 	if err != nil {
 		return DBError{Messsage: "Unable to get article details!", ActualError: err, ErrorFrom: nil}
 	}
 
-	allArticle, err := bll.repo.Decline(ctx)
+	err = bll.repo.Decline(ctx, &article)
 
 	if err != nil {
 		return DBError{Messsage: "Unable to decline article details!", ActualError: err, ErrorFrom: nil}

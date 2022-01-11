@@ -19,12 +19,12 @@ const (
 
 func SetupRoutes(connection *gorm.DB, mainRouter *mux.Router) {
 
-	var articleRepo taskRepos.Article = taskSqlRepos.CreateArticle(connection)
-	var articleBll taskBll.Article = taskBll.CreateArticleg(articleRepo)
-
-	apiRouter := mainRouter.PathPrefix("/api").Subrouter()
+	var articleRepo Article = CreateArticle(connection)
+	var articleBll Article = CreateArticleg(articleRepo)
 
 	artController := CreateArticle(articleBll)
+
+	apiRouter := mainRouter.PathPrefix("/api").Subrouter()
 
 	apiRouter.HandleFunc("/articles", artController.ShowAllArticle).Methods(http.MethodGet)
 	apiRouter.HandleFunc("/articles", APISessionAuthMiddlewareFunc(artController.AddArticle)).Methods(http.MethodPost)
